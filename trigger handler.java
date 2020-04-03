@@ -95,3 +95,15 @@ public class VoyagesTriggerHandler {
     }
     
 }
+
+for(Voyage__c v: lstVoyages){
+    v.FBC = [SELECT Id FROM FBC__c WHERE Name= :v.TECH_FBC_Import__c].Id
+    v.FCE=[SELECT Id FROM FCE__c WHERE Name= :v.TECH_FCE_Import__c]
+}
+
+test 2
+list<FBC__c> lFbc = [SELECT Id FROM FBC__c WHERE Name = :v.TECH_FBC_Import__c];
+if(lFbcsize()>0)
+    v.FBC__c = lFbc[0];
+else
+    insert new FBC
